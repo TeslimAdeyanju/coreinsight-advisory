@@ -89,9 +89,62 @@
     }
 
     /**
+     * Reveal cards and sections as they scroll into view
+     */
+    function initScrollReveal() {
+        const selector = '.problem-card, .service-card, .process-step, .benefit-item, ' +
+            '.about-preview-content, .about-visual, .service-detail-card, .story-item, ' +
+            '.value-item, .contact-item, .founder-section, .vision-section, .section-header, .mission-box';
+        const elements = Array.prototype.slice.call(document.querySelectorAll(selector));
+
+        if (!elements.length) {
+            return;
+        }
+
+        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+            elements.forEach(function(el) {
+                el.classList.add('reveal-visible');
+            });
+            return;
+        }
+
+        const seenParents = [];
+        elements.forEach(function(el) {
+            el.classList.add('reveal');
+
+            const parent = el.parentElement;
+            let entry = seenParents.find(function(p) { return p.parent === parent; });
+            if (!entry) {
+                entry = { parent: parent, count: 0 };
+                seenParents.push(entry);
+            }
+            const delay = Math.min(entry.count, 5) * 90;
+            entry.count += 1;
+            el.style.transitionDelay = delay + 'ms';
+        });
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+        elements.forEach(function(el) {
+            observer.observe(el);
+        });
+    }
+
+    /**
      * Initialize all event listeners
      */
     function init() {
+        initScrollReveal();
+
         // Mobile menu toggle
         if (menuToggle && navMenu) {
             menuToggle.addEventListener('click', toggleMobileMenu);
