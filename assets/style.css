@@ -367,12 +367,12 @@ p:last-child {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--spacing-2xl);
+    gap: var(--spacing-lg);
     width: 100%;
 }
 
 .hero-image {
-    flex: 1 1 320px;
+    flex: 1 1 460px;
     display: flex;
     justify-content: flex-end;
     animation: heroFadeUp 0.8s ease both;
@@ -381,8 +381,8 @@ p:last-child {
 
 .hero-image img {
     width: 100%;
-    max-width: 380px;
-    height: 440px;
+    max-width: 540px;
+    height: 560px;
     object-fit: cover;
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-lg);
@@ -393,8 +393,8 @@ p:last-child {
 }
 
 .hero-content {
-    max-width: 520px;
-    flex: 1 1 420px;
+    max-width: 480px;
+    flex: 1 1 380px;
 }
 
 .hero-logo {
