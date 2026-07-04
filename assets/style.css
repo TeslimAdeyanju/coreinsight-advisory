@@ -387,7 +387,7 @@ p:last-child {
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-lg);
     border: 1px solid rgba(255, 255, 255, 0.12);
-    filter: brightness(0.9) saturate(0.92);
+    filter: brightness(0.72) saturate(0.85) contrast(1.05);
     -webkit-mask-image: linear-gradient(to right, transparent, black 20%);
     mask-image: linear-gradient(to right, transparent, black 20%);
 }
